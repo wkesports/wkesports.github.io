@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WK-Esports</title>
+    <link type="text/css" rel="stylesheet" href="./css/major.css" />
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            position: relative;
+        }
+        .topbar{
+            position: absolute;
+            top: 0;left: 0;
+            width: 100vw;
+            height: 3rem;
+            backdrop-filter: blur(2rem);
+            -webkit-backdrop-filter: blur(2rem);
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .topbar::before{
+            content: '';
+            position: absolute;
+            top: 0;left: 0;right: 0;bottom: 0;
+            background: black;
+            opacity: 30%;
+            z-index: 0;
+        }
+        #wkflag{
+            width: 3rem;
+            height: 3rem;
+            margin-left: 1rem;
+        }
+        #mainpic{
+            position: relative;
+            transform: translateY(-3rem);
+            width: 100vw;
+            z-index: -1;
+            height: 80vh;
+            background: url("./images/0.png") center center no-repeat;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <img src="./images/WK_flag.png" id="wkflag"></img>
+    </div>
+    <div id="mainpic">
+        <h1 style="margin-top: 13rem;letter-spacing: 2rem;font-weight: bold;font-size: 4rem;">WKESPORTS</h1>
+        <h3 style="margin-top: 2rem;font-weight: lighter;"> - 专业的团队 - 展现你的才华 - 分享你的故事  - </h3>
+        <h3 style="margin-top: 2rem;font-weight: lighter;">当你迷茫时 当你把把白给时 当你遇到挫折时 加入我们 让你遇到更好的自己</h3>
+    </div>
+
+    <script>
+        // window.onscroll = function() {
+        //     var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        //     console.log(scrollTop);
+        // }
+    </script>
+</body>
+</html>
