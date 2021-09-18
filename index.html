@@ -13,12 +13,14 @@
         }
         body{
             position: relative;
+            height: 4000px;
+            overflow-x: hidden;
         }
         .topbar{
-            position: absolute;
-            top: 0;left: 0;
             width: 100vw;
             height: 3rem;
+            position: fixed;
+            top: 0;left: 0;
             backdrop-filter: blur(2rem);
             -webkit-backdrop-filter: blur(2rem);
             position: relative;
@@ -30,7 +32,7 @@
         }
         .topbar::before{
             content: '';
-            position: absolute;
+            position: fixed;
             top: 0;left: 0;right: 0;bottom: 0;
             background: black;
             opacity: 30%;
@@ -46,12 +48,22 @@
             transform: translateY(-3rem);
             width: 100vw;
             z-index: -1;
-            height: 80vh;
-            background: url("./images/0.png") center center no-repeat;
+            height: 90vh;
+            background: url("./images/total.png") center center no-repeat;
             background-size: cover;
             display: flex;
             align-items: center;
             flex-direction: column;
+        }
+        #mainpic>.text{
+            z-index: 1;
+        }
+        .blur{
+            position: absolute;
+            top: 0;left: 0;right: 0;bottom: 0;
+            backdrop-filter: blur(0rem);
+            -webkit-backdrop-filter: blur(0rem);
+            z-index: 0;
         }
     </style>
 </head>
@@ -60,16 +72,46 @@
         <img src="./images/WK_flag.png" id="wkflag"></img>
     </div>
     <div id="mainpic">
-        <h1 style="margin-top: 13rem;letter-spacing: 2rem;font-weight: bold;font-size: 4rem;">WKESPORTS</h1>
-        <h3 style="margin-top: 2rem;font-weight: lighter;"> - 专业的团队 - 展现你的才华 - 分享你的故事  - </h3>
-        <h3 style="margin-top: 2rem;font-weight: lighter;">当你迷茫时 当你把把白给时 当你遇到挫折时 加入我们 让你遇到更好的自己</h3>
+        <div id="mainpic_blur" class="blur"></div>
+        <h1 class="text" id="tp1" style="margin-top: 13rem;letter-spacing: 2rem;font-weight: bold;font-size: 4rem;">WKESPORTS</h1>
+        <h3 class="text" id="tp2" style="margin-top: 2rem;font-weight: lighter;"> - 专业的团队 - 展现你的才华 - 分享你的故事  - </h3>
+        <h3 class="text" id="tp3" style="margin-top: 2rem;font-weight: lighter;">当你迷茫时 当你把把白给时 当你遇到挫折时 加入我们 让你遇到更好的自己</h3>
     </div>
 
     <script>
-        // window.onscroll = function() {
-        //     var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-        //     console.log(scrollTop);
-        // }
+        function lerp(a,amax,lerpA,lerpB){
+            var t = a/amax
+            return (1-t)*lerpA+t*lerpB
+        }
+        function clamp(a,min,max){
+            return a<min?min:a>max?max:a
+        }
+        var timer = 0.0 //s
+        let tp1 = document.getElementById('tp1')
+        let tp2 = document.getElementById('tp2')
+        let tp3 = document.getElementById('tp3')
+        let mpblur = document.getElementById('mainpic_blur')
+        var scrollTop = 0
+
+        window.onscroll = ()=>{
+            scrollTop = document.documentElement.scrollTop;
+            var mpvalue = "blur("+lerp(clamp(scrollTop,0,300),300,0,2)+"rem)"
+            mpblur.style.backdropFilter = mpvalue
+            mpblur.style.webkitBackdropFilter = mpvalue
+        }
+        
+        var t = setInterval(()=>{
+            var value = lerp(clamp(timer,0,1.5),1.5,0,100)+"%"
+            // var mpvalue = "blur("+lerp(clamp(timer-1.5,0,0.6),0.6,2,0)+"rem)"
+            tp1.style.opacity = value
+            tp2.style.opacity = value
+            tp3.style.opacity = value
+            timer+=0.01
+
+            if(timer>8){
+                clearInterval(t)
+            }
+        },10)
     </script>
 </body>
 </html>
