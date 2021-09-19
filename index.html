@@ -33,7 +33,7 @@
             content: '';
             position: fixed;
             top: 0;left: 0;right: 0;bottom: 0;
-            background: black;
+            background: white;
             opacity: 30%;
             z-index: 0;
         }
@@ -41,13 +41,13 @@
             width: 3rem;
             height: 3rem;
             margin-left: 1rem;
+            z-index: 2;
         }
         #mainpic{
             position: fixed;
             top: 0;
             width: 100vw;
             z-index: -1;
-            height: 90vh;
             background: url("./images/total.png") center center no-repeat;
             background-size: cover;
             display: flex;
@@ -60,10 +60,6 @@
             z-index: 1;
             text-shadow: 0 0 1rem white;
         }
-        #mainContainer{
-            top: 0;left: 0;
-            position: fixed;
-        }
         .blur{
             position: absolute;
             top: 0;left: 0;right: 0;bottom: 0;
@@ -73,10 +69,10 @@
         }
         #about{
             position: fixed;
-            background: gray;
-            top: 90vh;
+            background: white;
+            top: 100vh;
             width: 100vw;
-            height: 400px;
+            height: 100vh;
         }
     </style>
 </head>
@@ -84,16 +80,14 @@
     <div class="topbar">
         <img src="./images/WK_flag.png" id="wkflag"></img>
     </div>
-    <div id="mainContainer">
-        <div id="mainpic">
-            <div id="mainpic_blur" class="blur"></div>
-            <h1 class="text" id="tp1" style="margin-top: 13rem;letter-spacing: 2rem;font-weight: bold;font-size: 4rem;">WKESPORTS</h1>
-            <h3 class="text" id="tp2" style="margin-top: 2rem;font-weight: lighter;"> - 专业的团队 - 展现你的才华 - 分享你的故事  - </h3>
-            <h3 class="text" id="tp3" style="margin-top: 2rem;font-weight: lighter;">当你迷茫时 当你把把白给时 当你遇到挫折时 加入我们 让你遇到更好的自己</h3>
-        </div>
-        <div id="about">
+    <div id="mainpic" style="height: 100vh;">
+        <div id="mainpic_blur" class="blur"></div>
+        <h1 class="text" id="tp1" style="margin-top: 13rem;letter-spacing: 2rem;font-weight: bold;font-size: 4rem;">WKESPORTS</h1>
+        <h3 class="text" id="tp2" style="margin-top: 2rem;font-weight: lighter;"> - 专业的团队 - 展现你的才华 - 分享你的故事  - </h3>
+        <h3 class="text" id="tp3" style="margin-top: 2rem;font-weight: lighter;">当你迷茫时 当你把把白给时 当你遇到挫折时 加入我们 让你遇到更好的自己</h3>
+    </div>
+    <div id="about">
 
-        </div>
     </div>
 
     <script lang="javascript" src="./js/basic.js"></script>
@@ -138,11 +132,16 @@
                     }
                 }
                 o.intervalI = intervalI
-                var b = lerp(o.RATION-o.KEYFRAMEs[intervalI].r,
-                                o.KEYFRAMEs[intervalI+1].r-o.KEYFRAMEs[intervalI].r,
-                                o.KEYFRAMEs[intervalI].y,
-                                o.KEYFRAMEs[intervalI+1].y
-                )
+                var b
+                if(lerpable(o.KEYFRAMEs[intervalI].y)){
+                    b = lerp(o.RATION-o.KEYFRAMEs[intervalI].r,
+                                    o.KEYFRAMEs[intervalI+1].r-o.KEYFRAMEs[intervalI].r,
+                                    o.KEYFRAMEs[intervalI].y,
+                                    o.KEYFRAMEs[intervalI+1].y
+                    )
+                }else{
+                    b = o.KEYFRAMEs[intervalI].y
+                }
                 var a = pre+b+suf
                 o.value = b
                 o.callback(a,b,o)
@@ -165,36 +164,43 @@
                 suf="rem)",
                 keyframs=[{r:0,y:0},{r:800,y:2}]
             ),
-            //主图片滚动
+            //WKESPORTS文字变化
             create_LINEAR_ANIMATION(
-                callback=pic_scroll_ani_callback,
+                callback=tp1_text_ani_callback,
                 pre='',
-                suf='px',
-                keyframs=[{r:800,y:0},{r:800+1.7*vh,y:-0.9*vh}]
+                suf='',
+                keyframs=[{r:200,y:'WKESPORTS'},{r:300,y:'KESPORT'},{r:400,y:'ESPOR'},{r:500,y:'SPO'},{r:600,y:'P'},{r:700,y:''}]
             ),
-            //主图片缩放
+            //tp2和tp2透明度
             create_LINEAR_ANIMATION(
-                callback=pic_scale_ani_callback,
-                pre='scale(',
-                suf=')',
-                keyframs=[{r:1200,y:1},{r:800+0.9*vh,y:0.5}]
+                callback=tp2tp3_opa_ani_callback,
+                pre='',
+                suf='%',
+                keyframs=[{r:200,y:100},{r:700,y:0}]
             ),
+            // //主图片滚动
+            // create_LINEAR_ANIMATION(
+            //     callback=pic_scroll_ani_callback,
+            //     pre='',
+            //     suf='px',
+            //     keyframs=[{r:800,y:0},{r:800+1.7*vh,y:-vh}]
+            // ),
+            // //主图片缩放
+            // create_LINEAR_ANIMATION(
+            //     callback=pic_scale_ani_callback,
+            //     pre='scale(',
+            //     suf=')',
+            //     keyframs=[{r:1200,y:1},{r:800+vh,y:0.5}]
+            // ),
             //about滚动
             create_LINEAR_ANIMATION(
                 callback=about_scroll_ani_callback,
                 pre='',
                 suf='px',
-                keyframs=[{r:800,y:0.9*vh},{r:800+0.9*vh,y:0},{r:1600+0.9*vh,y:0},{r:1600+1.8*vh,y:-0.9*vh}]
+                keyframs=[{r:800,y:vh},{r:800+vh,y:0},{r:3000+vh,y:0},{r:3000+1.8*vh,y:-vh}]
             )
         ]
         var timer_KEYFRAME_anis = [
-            //开场文字透明度
-            create_LINEAR_ANIMATION(
-                callback=text_opa_ani_callback,
-                pre='',
-                suf='%',
-                keyframs=[{r:0,y:0},{r:0.6,y:100}]
-            ),
             //开场图片透明度
             create_LINEAR_ANIMATION(
                 callback=pic_opa_ani_callback,
@@ -212,6 +218,13 @@
         function pic_scale_ani_callback(r){
             mainpic.style.transform = r
         }
+        function tp2tp3_opa_ani_callback(r){
+            tp2.style.opacity = r
+            tp3.style.opacity = r
+        }
+        function tp1_text_ani_callback(r){
+            tp1.innerHTML = r
+        }
         function text_opa_ani_callback(r){
             tp1.style.opacity = r
             tp2.style.opacity = r
@@ -228,8 +241,8 @@
         }
         /************/
 
-        /*滚动页面动画*/
         window.onload=()=>{
+            /*滚动页面动画*/
             window.onscroll = ()=>{
                 scrollTop = document.documentElement.scrollTop;
                 for(var i=0;i<scroll_KEYFRAME_anis.length;i++){
