@@ -198,24 +198,27 @@
         /************/
 
         /*滚动页面动画*/
-        window.onscroll = ()=>{
-            scrollTop = document.documentElement.scrollTop;
-            for(var i=0;i<scroll_KEYFRAME_anis.length;i++){
-                scroll_KEYFRAME_anis[i].update(scroll_KEYFRAME_anis[i],scrollTop)
+        window.onload=()=>{
+            window.onscroll = ()=>{
+                scrollTop = document.documentElement.scrollTop;
+                for(var i=0;i<scroll_KEYFRAME_anis.length;i++){
+                    scroll_KEYFRAME_anis[i].update(scroll_KEYFRAME_anis[i],scrollTop)
+                }
             }
+            
+            /*时间流逝动画*/
+            var t = setInterval(()=>{
+                for(var i=0;i<timer_KEYFRAME_anis.length;i++){
+                    timer_KEYFRAME_anis[i].update(timer_KEYFRAME_anis[i],timer)
+                }
+
+                timer+=0.01
+                if(timer>8){
+                    clearInterval(t)
+                }
+            },10)
         }
         
-        /*时间流逝动画*/
-        var t = setInterval(()=>{
-            for(var i=0;i<timer_KEYFRAME_anis.length;i++){
-                timer_KEYFRAME_anis[i].update(timer_KEYFRAME_anis[i],timer)
-            }
-
-            timer+=0.01
-            if(timer>8){
-                clearInterval(t)
-            }
-        },10)
     </script>
 </body>
 </html>
