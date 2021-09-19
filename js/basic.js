@@ -7,3 +7,9 @@ function clamp(a,min,max){
 }
 var timer = 0.0 //s
 var scrollTop = 0
+function lerpable(item){
+    if(typeof(item)=='number'){
+        return true
+    }
+    return false
+}

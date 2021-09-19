@@ -43,7 +43,7 @@
             margin-left: 1rem;
         }
         #mainpic{
-            position: relative;
+            position: fixed;
             transform: translateY(-3rem);
             width: 100vw;
             z-index: -1;
@@ -54,6 +54,7 @@
             align-items: center;
             flex-direction: column;
             overflow-x: hidden;
+            opacity: 0;
         }
         #mainpic>.text{
             z-index: 1;
@@ -61,7 +62,7 @@
         }
         #mainContainer{
             top: 0;left: 0;
-            position: absolute;
+            position: fixed;
         }
         .blur{
             position: absolute;
@@ -69,6 +70,13 @@
             backdrop-filter: blur(0rem);
             -webkit-backdrop-filter: blur(0rem);
             z-index: 0;
+        }
+        #about{
+            position: absolute;
+            background: gray;
+            top: 90vh;
+            width: 100vw;
+            height: 400px;
         }
     </style>
 </head>
@@ -83,37 +91,43 @@
             <h3 class="text" id="tp2" style="margin-top: 2rem;font-weight: lighter;"> - 专业的团队 - 展现你的才华 - 分享你的故事  - </h3>
             <h3 class="text" id="tp3" style="margin-top: 2rem;font-weight: lighter;">当你迷茫时 当你把把白给时 当你遇到挫折时 加入我们 让你遇到更好的自己</h3>
         </div>
+        <div id="about">
+
+        </div>
     </div>
 
     <script lang="javascript" src="./js/basic.js"></script>
     <script>
+        var vh = document.documentElement.clientHeight
+        var vw = document.documentElement.clientWidth
         function create_LINEAR_ANIMATION(callback,pre,suf,keyframs){
             var obj = new Object
             obj.RATION = 0
-            // obj.PROPERTY = property
             obj.KEYFRAMEs = keyframs
             obj.callback = callback
             obj.pre = pre
             obj.suf = suf
+            obj.intervalI = 0
+            obj.value = 0
+
             obj.update = (o,r)=>{
-                // targetObj.setAttribute(o.PROPERTY,'blur(2rem)')
                 o.RATION = r
                 if(o.KEYFRAMEs.length==1){
-                    // targetObj.setAttribute(o.PROPERTY,pre+o.KEYFRAMEs[0].y+suf)
-                    o.callback(pre+o.KEYFRAMEs[0].y+suf,o.KEYFRAMEs[0].y)
-                    // o.PROPERTY = o.KEYFRAMEs[0].y
+                    o.intervalI = 0
+                    o.value = o.KEYFRAMEs[0].y
+                    o.callback(pre+o.KEYFRAMEs[0].y+suf,o.KEYFRAMEs[0].y,o)
                     return
                 }
                 if(o.RATION<o.KEYFRAMEs[0].r){
-                    // targetObj.setAttribute(o.PROPERTY,o.pre+o.KEYFRAMEs[0].y+suf)
-                    // o.PROPERTY = o.pre+o.KEYFRAMEs[0].y+suf
-                    o.callback(o.pre+o.KEYFRAMEs[0].y+suf,o.KEYFRAMEs[0].y)
+                    o.intervalI = 0
+                    o.value = o.KEYFRAMEs[0].y
+                    o.callback(o.pre+o.KEYFRAMEs[0].y+suf,o.KEYFRAMEs[0].y,o)
                     return
                 }
                 if(o.RATION>=o.KEYFRAMEs[o.KEYFRAMEs.length-1].r){
-                    // targetObj.setAttribute(o.PROPERTY,o.pre+o.KEYFRAMEs[o.KEYFRAMEs.length-1].y+o.suf)
-                    // o.PROPERTY = o.pre+o.KEYFRAMEs[o.KEYFRAMEs.length-1].y+o.suf
-                    o.callback(o.pre+o.KEYFRAMEs[o.KEYFRAMEs.length-1].y+o.suf,o.KEYFRAMEs[o.KEYFRAMEs.length-1].y)
+                    o.intervalI = o.KEYFRAMEs.length-1
+                    o.value = o.KEYFRAMEs[o.KEYFRAMEs.length-1].y
+                    o.callback(o.pre+o.KEYFRAMEs[o.KEYFRAMEs.length-1].y+o.suf,o.KEYFRAMEs[o.KEYFRAMEs.length-1].y,o)
                     return
                 }
                 var intervalI = -1
@@ -123,65 +137,67 @@
                         break
                     }
                 }
+                o.intervalI = intervalI
                 var b = lerp(o.RATION-o.KEYFRAMEs[intervalI].r,
                                 o.KEYFRAMEs[intervalI+1].r-o.KEYFRAMEs[intervalI].r,
                                 o.KEYFRAMEs[intervalI].y,
                                 o.KEYFRAMEs[intervalI+1].y
                 )
                 var a = pre+b+suf
-                // targetObj.setAttribute(o.PROPERTY,a)
-                o.callback(a,b)
-                // o.PROPERTY = a
-                // console.log(o.PROPERTY);
+                o.value = b
+                o.callback(a,b,o)
             }
             return obj
         }
         let mpblur = document.getElementById('mainpic_blur')
-        let mainpic = document.getElementById('mainContainer')
+        let mainpic = document.getElementById('mainpic')
         let tp1 = document.getElementById('tp1')
         let tp2 = document.getElementById('tp2')
         let tp3 = document.getElementById('tp3')
-        let mainContainer = document.getElementById('mainContainer')
+        let about = document.getElementById('about')
         
         /*动画声明*/
         var scroll_KEYFRAME_anis = [
+            //滚动高斯模糊
             create_LINEAR_ANIMATION(
                 callback=mpblur_ani_callback,
                 pre="blur(",
                 suf="rem)",
                 keyframs=[{r:0,y:0},{r:800,y:2}]
             ),
+            //主图片滚动
             create_LINEAR_ANIMATION(
-                callback=mainContainer_ani_callback,
+                callback=pic_scroll_ani_callback,
                 pre='',
                 suf='px',
-                keyframs=[{r:0,y:0},{r:800,y:800}]
+                keyframs=[{r:0,y:0},{r:800,y:0},{r:800+0.9*vh,y:-0.9*vh}]
+            ),
+            //about滚动
+            create_LINEAR_ANIMATION(
+                callback=about_scroll_ani_callback,
+                pre='',
+                suf='px',
+                keyframs=[{r:800,y:0.9*vh},{r:800+0.9*vh,y:0},{r:1600+0.9*vh,y:0},{r:1600+1.8*vh,y:-0.9*vh}]
             )
         ]
         var timer_KEYFRAME_anis = [
+            //开场文字透明度
             create_LINEAR_ANIMATION(
                 callback=text_opa_ani_callback,
                 pre='',
                 suf='%',
                 keyframs=[{r:0,y:0},{r:0.6,y:100}]
             ),
+            //开场图片透明度
             create_LINEAR_ANIMATION(
-                callback=text_transform_ani_callback,
-                pre='translateY(',
-                suf='px)',
-                keyframs=[{r:0,y:-30},{r:0.6,y:0}]
+                callback=pic_opa_ani_callback,
+                pre='',
+                suf='%',
+                keyframs=[{r:0,y:0},{r:0.6,y:100}]
             )
         ]
         
         /*动画回调函数*/
-        function mainContainer_ani_callback(r){
-            mainContainer.style.top = r
-        }
-        function tp_trans_callback(r,value){
-            tp1.style.transform = r
-            tp2.style.transform = r
-            tp3.style.transform = r
-        }
         function mpblur_ani_callback(r){
             mpblur.style.backdropFilter = r
         }
@@ -190,10 +206,14 @@
             tp2.style.opacity = r
             tp3.style.opacity = r
         }
-        function text_transform_ani_callback(r){
-            tp1.style.transform = r
-            tp2.style.transform = r
-            tp3.style.transform = r
+        function pic_opa_ani_callback(r){
+            mainpic.style.opacity = r
+        }
+        function pic_scroll_ani_callback(r){
+            mainpic.style.top = r
+        }
+        function about_scroll_ani_callback(r){
+            about.style.top = r
         }
         /************/
 
@@ -217,6 +237,11 @@
                     clearInterval(t)
                 }
             },10)
+        }
+        window.onresize=()=>{
+            vh = document.documentElement.clientHeight
+            vw = document.documentElement.clientWidth
+            console.log('change size:(%d,%d)',vw,vh);
         }
         
     </script>
