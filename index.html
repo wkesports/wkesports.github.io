@@ -44,7 +44,7 @@
         }
         #mainpic{
             position: fixed;
-            transform: translateY(-3rem);
+            top: 0;
             width: 100vw;
             z-index: -1;
             height: 90vh;
@@ -170,7 +170,14 @@
                 callback=pic_scroll_ani_callback,
                 pre='',
                 suf='px',
-                keyframs=[{r:0,y:0},{r:800,y:0},{r:800+0.9*vh,y:-0.9*vh}]
+                keyframs=[{r:800,y:0},{r:800+0.9*vh,y:-0.9*vh}]
+            ),
+            //主图片缩放
+            create_LINEAR_ANIMATION(
+                callback=pic_scale_ani_callback,
+                pre='scale(',
+                suf=')',
+                keyframs=[{r:800,y:1},{r:800+0.9*vh,y:0.5}]
             ),
             //about滚动
             create_LINEAR_ANIMATION(
@@ -201,6 +208,9 @@
         function mpblur_ani_callback(r){
             mpblur.style.backdropFilter = r
             mpblur.style.webkitBackdropFilter = r
+        }
+        function pic_scale_ani_callback(r){
+            mainpic.style.transform = r
         }
         function text_opa_ani_callback(r){
             tp1.style.opacity = r
