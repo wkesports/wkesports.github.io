@@ -10,10 +10,11 @@
         *{
             margin: 0;
             padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         }
         body{
             position: relative;
-            height: 4000px;
+            height: 12000px;
             overflow-x: hidden;
         }
         .topbar{
@@ -73,6 +74,39 @@
             top: 100vh;
             width: 100vw;
             height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #about>h1{
+            margin-top: 6rem;
+        }
+        #qrcode{
+            position: absolute;
+            top: calc(20vh);
+            transform: scale(0.2);
+        }
+        h1{
+            font-size: 4rem;
+        }
+        .icons{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .icon{
+            position: absolute;
+            top: 40vh;
+            left: -500px;
+        }
+        .icon>h3{
+            text-align: center;
+            font-size: x-large;
+        }
+        .icon>img{
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
         }
     </style>
 </head>
@@ -87,7 +121,116 @@
         <h3 class="text" id="tp3" style="margin-top: 2rem;font-weight: lighter;">当你迷茫时 当你把把白给时 当你遇到挫折时 加入我们 让你遇到更好的自己</h3>
     </div>
     <div id="about">
+        <h1>介绍我们</h1>
+        <img width="200px" height="200px" id="qrcode" src="./images/group_qrcode.png" >
+        <div id="icons">
+            <div class='icon'>
+                <h3 style="font-weight: bold;font-family: Arial, Helvetica, sans-serif;">Yami狗</h3>
+                <img src="https://q1.qlogo.cn/g?b=qq&nk=516470700&s=640"/>
+            </div>
+            <div class='icon'>
+                <h3 style="font-weight: bold;font-family: Arial, Helvetica, sans-serif;">无敌的姆Q猪</h3>
+                <img src="https://q1.qlogo.cn/g?b=qq&nk=2547670357&s=640"/>
+            </div>
+            
+            <div class='icon'>
+                <h3 style="font-weight: bold;font-family: Arial, Helvetica, sans-serif;">阿枝</h3>
+                <img src="https://q1.qlogo.cn/g?b=qq&nk=841500898&s=640"/>
+            </div>
+            
+            
+            <div class='icon'>
+                <h3 style="font-weight: bold;font-family: Arial, Helvetica, sans-serif;">唔姆</h3>
+                <img src="https://q1.qlogo.cn/g?b=qq&nk=852050163&s=640"/>
+            </div>
+            <div class='icon'>
+                <h3 style="font-weight: bold;font-family: Arial, Helvetica, sans-serif;">惑惑老姐</h3>
+                <img src="https://q1.qlogo.cn/g?b=qq&nk=2209438589&s=640"/>
+            </div>
+            <div class='icon'>
+                <h3 style="font-weight: bold;font-family: Arial, Helvetica, sans-serif;">安利老哥</h3>
+                <img src="https://q1.qlogo.cn/g?b=qq&nk=624349820&s=640"/>
+            </div>
+            <div class='icon'>
+                <h3 style="font-weight: bold;font-family: Arial, Helvetica, sans-serif;">陈有奶</h3>
+                <img src="https://q1.qlogo.cn/g?b=qq&nk=2865612109&s=640"/>
+            </div>
+            <div class='icon'>
+                <h3 style="font-weight: bold;font-family: Arial, Helvetica, sans-serif;">墨镜骚顾</h3>
+                <img src="https://q1.qlogo.cn/g?b=qq&nk=549556031&s=640"/>
+            </div>
+            <div class='icon'>
+                <h3 style="font-weight: bold;font-family: Arial, Helvetica, sans-serif;">泡泡</h3>
+                <img src="https://q1.qlogo.cn/g?b=qq&nk=1551272580&s=640"/>
+            </div>
+            <div class='icon'>
+                <h3 style="font-weight: bold;font-family: Arial, Helvetica, sans-serif;">厚大法爷</h3>
+                <img src="https://q1.qlogo.cn/g?b=qq&nk=497626396&s=640"/>
+            </div>
+            <div class='icon'>
+                <h3 style="font-weight: bold;font-family: Arial, Helvetica, sans-serif;">麦片</h3>
+                <img src="https://q1.qlogo.cn/g?b=qq&nk=2810205153&s=640"/>
+            </div>
+            <div class='icon'>
+                <h3 style="font-weight: bold;font-family: Arial, Helvetica, sans-serif;">御坂小姐姐</h3>
+                <img src="https://q1.qlogo.cn/g?b=qq&nk=1183764010&s=640"/>
+            </div>
+            <div class='icon'>
+                <h3 style="font-weight: bold;font-family: Arial, Helvetica, sans-serif;">魔男</h3>
+                <img src="https://q1.qlogo.cn/g?b=qq&nk=279396032&s=640"/>
+            </div>
+            <div class='icon'>
+                <h3 style="font-weight: bold;font-family: Arial, Helvetica, sans-serif;">小小</h3>
+                <img src="https://q1.qlogo.cn/g?b=qq&nk=1255762001&s=640"/>
+            </div>
+            <div class='icon'>
+                <h3 style="font-weight: bold;font-family: Arial, Helvetica, sans-serif;">Geyu</h3>
+                <img src="https://q1.qlogo.cn/g?b=qq&nk=1700132494&s=640"/>
+            </div>
+            
+            <div class='icon'>
+                <h3 style="font-weight: bold;font-family: Arial, Helvetica, sans-serif;">樽哥</h3>
+                <img src="https://q1.qlogo.cn/g?b=qq&nk=927309247&s=640"/>
+            </div>
+            <div class='icon'>
+                <h3 style="font-weight: bold;font-family: Arial, Helvetica, sans-serif;">鸡爷</h3>
+                <img src="https://q1.qlogo.cn/g?b=qq&nk=969409834&s=640"/>
+            </div>
+            <div class='icon'>
+                <h3 style="font-weight: bold;font-family: Arial, Helvetica, sans-serif;">钥匙姐姐</h3>
+                <img src="https://q1.qlogo.cn/g?b=qq&nk=1003998743&s=640"/>
+            </div>
+            <div class='icon'>
+                <h3 style="font-weight: bold;font-family: Arial, Helvetica, sans-serif;">二姑</h3>
+                <img src="https://q1.qlogo.cn/g?b=qq&nk=807139428&s=640"/>
+            </div>
+            <div class='icon'>
+                <h3 style="font-weight: bold;font-family: Arial, Helvetica, sans-serif;">BOT</h3>
+                <img src="https://q1.qlogo.cn/g?b=qq&nk=1021863398&s=640"/>
+            </div>
+            <div class='icon'>
+                <h3 style="font-weight: bold;font-family: Arial, Helvetica, sans-serif;">无敌的大B</h3>
+                <img src="https://q1.qlogo.cn/g?b=qq&nk=1363964141&s=640" />
+            </div>
+    
+            <div class='icon'>
+                 <h3 style="font-weight: bold;font-family: Arial, Helvetica, sans-serif;">蛤蛤鸽</h3>
+                 <img src="https://q1.qlogo.cn/g?b=qq&nk=805034840&s=640" />
+            </div>
+    
+            <div class='icon'>
+                <h3 style="font-weight: bold;font-family: Arial, Helvetica, sans-serif;">太空人</h3>
+                <img src="https://q1.qlogo.cn/g?b=qq&nk=2637197332&s=640" />
+            </div>
+    
+            <div class='icon'>
+                <h3 style="font-weight: bold;font-family: Arial, Helvetica, sans-serif;">Aki</h3>
+                <img src="https://q1.qlogo.cn/g?b=qq&nk=2755770955&s=640" />
+            </div>
+        </div>
+        
 
+        
     </div>
 
     <script lang="javascript" src="./js/basic.js"></script>
@@ -103,30 +246,25 @@
             obj.suf = suf
             obj.intervalI = 0
             obj.value = 0
-
-            obj.update = (o,r)=>{
-                o.RATION = r
+            obj.get = (o,r)=>{
                 if(o.KEYFRAMEs.length==1){
                     o.intervalI = 0
-                    o.value = o.KEYFRAMEs[0].y
-                    o.callback(pre+o.KEYFRAMEs[0].y+suf,o.KEYFRAMEs[0].y,o)
-                    return
+                    // o.value = o.KEYFRAMEs[0].y
+                    return o.KEYFRAMEs[0].y
                 }
-                if(o.RATION<o.KEYFRAMEs[0].r){
+                if(r<o.KEYFRAMEs[0].r){
                     o.intervalI = 0
-                    o.value = o.KEYFRAMEs[0].y
-                    o.callback(o.pre+o.KEYFRAMEs[0].y+suf,o.KEYFRAMEs[0].y,o)
-                    return
+                    // o.value = o.KEYFRAMEs[0].y
+                    return o.KEYFRAMEs[0].y
                 }
-                if(o.RATION>=o.KEYFRAMEs[o.KEYFRAMEs.length-1].r){
+                if(r>=o.KEYFRAMEs[o.KEYFRAMEs.length-1].r){
                     o.intervalI = o.KEYFRAMEs.length-1
-                    o.value = o.KEYFRAMEs[o.KEYFRAMEs.length-1].y
-                    o.callback(o.pre+o.KEYFRAMEs[o.KEYFRAMEs.length-1].y+o.suf,o.KEYFRAMEs[o.KEYFRAMEs.length-1].y,o)
-                    return
+                    // o.value = o.KEYFRAMEs[o.KEYFRAMEs.length-1].y
+                    return o.KEYFRAMEs[o.KEYFRAMEs.length-1].y
                 }
                 var intervalI = -1
                 for(var i = 0;i<o.KEYFRAMEs.length-1;i++){
-                    if(o.RATION>=o.KEYFRAMEs[i].r&&o.RATION<o.KEYFRAMEs[i+1].r){
+                    if(r>=o.KEYFRAMEs[i].r&&r<o.KEYFRAMEs[i+1].r){
                         intervalI = i
                         break
                     }
@@ -134,7 +272,7 @@
                 o.intervalI = intervalI
                 var b
                 if(lerpable(o.KEYFRAMEs[intervalI].y)){
-                    b = lerp(o.RATION-o.KEYFRAMEs[intervalI].r,
+                    b = lerp(r-o.KEYFRAMEs[intervalI].r,
                                     o.KEYFRAMEs[intervalI+1].r-o.KEYFRAMEs[intervalI].r,
                                     o.KEYFRAMEs[intervalI].y,
                                     o.KEYFRAMEs[intervalI+1].y
@@ -142,8 +280,12 @@
                 }else{
                     b = o.KEYFRAMEs[intervalI].y
                 }
+                // o.value = b
+                return b
+            }
+            obj.update = (o,r)=>{
+                var b=o.get(o,r)
                 var a = pre+b+suf
-                o.value = b
                 o.callback(a,b,o)
             }
             return obj
@@ -154,6 +296,10 @@
         let tp2 = document.getElementById('tp2')
         let tp3 = document.getElementById('tp3')
         let about = document.getElementById('about')
+        let qrcode = document.getElementById('qrcode')
+
+        let icons = document.getElementById('icons').children
+        console.log(icons);
         
         /*动画声明*/
         var scroll_KEYFRAME_anis = [
@@ -178,27 +324,55 @@
                 suf='%',
                 keyframs=[{r:200,y:100},{r:700,y:0}]
             ),
-            // //主图片滚动
-            // create_LINEAR_ANIMATION(
-            //     callback=pic_scroll_ani_callback,
-            //     pre='',
-            //     suf='px',
-            //     keyframs=[{r:800,y:0},{r:800+1.7*vh,y:-vh}]
-            // ),
-            // //主图片缩放
-            // create_LINEAR_ANIMATION(
-            //     callback=pic_scale_ani_callback,
-            //     pre='scale(',
-            //     suf=')',
-            //     keyframs=[{r:1200,y:1},{r:800+vh,y:0.5}]
-            // ),
             //about滚动
             create_LINEAR_ANIMATION(
                 callback=about_scroll_ani_callback,
                 pre='',
                 suf='px',
-                keyframs=[{r:800,y:vh},{r:800+vh,y:0},{r:3000+vh,y:0},{r:3000+1.8*vh,y:-vh}]
+                keyframs=[{r:800,y:vh},{r:800+vh,y:0},{r:6000+vh,y:0},{r:6000+1.8*vh,y:-vh}]
+            ),
+            //二维码缩放
+            create_LINEAR_ANIMATION(
+                callback=qrcode_scale,
+                pre='scale(',
+                suf=')',
+                keyframs=[{r:700+vh,y:0.2},{r:800+vh,y:1}]
+            ),
+            //二维码纵向移动
+            create_LINEAR_ANIMATION(
+                callback=qrcode_vmove,
+                pre='',
+                suf='px',
+                keyframs=[{r:800+vh,y:0.2*vh},{r:1100+vh,y:60}]
+            ),
+            //二维码横向移动
+            create_LINEAR_ANIMATION(
+                callback=qrcode_hmove,
+                pre='',
+                suf='px',
+                keyframs=[{r:800+vh,y:0.5*vw-100},{r:1100+vh,y:100}]
+            ),
+            //头像移动
+            create_LINEAR_ANIMATION(
+                callback=icon_move,
+                pre='',
+                suf='px',
+                keyframs=[{r:1100+vh,y:-500},{r:2000+vh,y:2*vw/3-100},{r:4000+vh,y:vw}]
+            ),
+            //头像缩放
+            create_LINEAR_ANIMATION(
+                callback=icon_scale,
+                pre='',
+                suf='',
+                keyframs=[{r:1100+vh,y:1},{r:2000+vh,y:1},{r:2700+vh,y:0}]
             )
+            //头像缩放
+            // create_LINEAR_ANIMATION(
+            //     callback=icon_scale,
+            //     pre='',
+            //     suf=''
+            //     keyframs=[{r:1100+vh,y:1}]
+            // )
         ]
         var timer_KEYFRAME_anis = [
             //开场图片透明度
@@ -211,12 +385,28 @@
         ]
         
         /*动画回调函数*/
+        function icon_scale(r,v,o){
+            for(var i = 0;i<24;i++){
+                icons[i].style.opacity = o.get(o,scrollTop-(i*150))
+            }
+        }
+        function icon_move(r,v,o){
+            for(var i = 0;i<24;i++){
+                icons[i].style.left = o.get(o,scrollTop-(i*150))+'px'
+            }
+        }
+        function qrcode_hmove(r){
+            qrcode.style.left = r
+        }
+        function qrcode_vmove(r){
+            qrcode.style.top = r
+        }
+        function qrcode_scale(r){
+            qrcode.style.transform = r
+        }
         function mpblur_ani_callback(r){
             mpblur.style.backdropFilter = r
             mpblur.style.webkitBackdropFilter = r
-        }
-        function pic_scale_ani_callback(r){
-            mainpic.style.transform = r
         }
         function tp2tp3_opa_ani_callback(r){
             tp2.style.opacity = r
@@ -233,14 +423,15 @@
         function pic_opa_ani_callback(r){
             mainpic.style.opacity = r
         }
-        function pic_scroll_ani_callback(r){
-            mainpic.style.top = r
-        }
         function about_scroll_ani_callback(r){
             about.style.top = r
         }
         /************/
 
+        setInterval(()=>{
+                vh = document.documentElement.clientHeight
+                vw = document.documentElement.clientWidth
+        },500)
         window.onload=()=>{
             /*滚动页面动画*/
             window.onscroll = ()=>{
