@@ -237,7 +237,7 @@
     <script>
         var vh = document.documentElement.clientHeight
         var vw = document.documentElement.clientWidth
-        function create_LINEAR_ANIMATION(callback,pre,suf,keyframs){
+        function create_LINEAR_ANIMATION(callback,pre='',suf='',keyframs){
             var obj = new Object
             obj.RATION = 0
             obj.KEYFRAMEs = keyframs
@@ -303,6 +303,11 @@
         
         /*动画声明*/
         var scroll_KEYFRAME_anis = [
+            //主图片显示
+            create_LINEAR_ANIMATION(
+                callback=mainpic_display,pre='',suf='',
+                keyframs=[{r:0,y:'flex'},{r:800+vh,y:'none'}]
+            ),
             //滚动高斯模糊
             create_LINEAR_ANIMATION(
                 callback=mpblur_ani_callback,
@@ -366,13 +371,6 @@
                 suf='',
                 keyframs=[{r:1100+vh,y:1},{r:2000+vh,y:1},{r:2700+vh,y:0}]
             )
-            //头像缩放
-            // create_LINEAR_ANIMATION(
-            //     callback=icon_scale,
-            //     pre='',
-            //     suf=''
-            //     keyframs=[{r:1100+vh,y:1}]
-            // )
         ]
         var timer_KEYFRAME_anis = [
             //开场图片透明度
@@ -385,6 +383,9 @@
         ]
         
         /*动画回调函数*/
+        function mainpic_display(r){
+            mainpic.style.display = r
+        }
         function icon_scale(r,v,o){
             for(var i = 0;i<24;i++){
                 icons[i].style.opacity = o.get(o,scrollTop-(i*150))
