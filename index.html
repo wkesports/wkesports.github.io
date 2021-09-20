@@ -14,7 +14,7 @@
         }
         body{
             position: relative;
-            height: 12000px;
+            height: 50000px;
             overflow-x: hidden;
         }
         .topbar{
@@ -96,9 +96,23 @@
         }
         .icon{
             position: absolute;
-            top: 40vh;
-            left: -500px;
+            top: 100vh;
+            left: 0;
+            width: 50vw;
+            height: 100vh;
+            display: flex;
+            background: purple;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
+        /* .icon::before{
+            position: absolute;
+            top: 0;left: 0;right: 0;bottom: 0;
+            content: '';
+            background: purple;
+            opacity: 0.2;
+        } */
         .icon>h3{
             text-align: center;
             font-size: x-large;
@@ -122,7 +136,6 @@
     </div>
     <div id="about">
         <h1>介绍我们</h1>
-        <img width="200px" height="200px" id="qrcode" src="./images/group_qrcode.png" >
         <div id="icons">
             <div class='icon'>
                 <h3 style="font-weight: bold;font-family: Arial, Helvetica, sans-serif;">Yami</h3>
@@ -142,7 +155,6 @@
             <div class='icon'>
                 <h3 style="font-weight: bold;font-family: Arial, Helvetica, sans-serif;">唔姆</h3>
                 <img src="https://q1.qlogo.cn/g?b=qq&nk=852050163&s=640"/>
-
             </div>
             <div class='icon'>
                 <h3 style="font-weight: bold;font-family: Arial, Helvetica, sans-serif;">惑惑</h3>
@@ -246,8 +258,8 @@
             <div class='icon'>
                 <h3 style="font-weight: bold;font-family: Arial, Helvetica, sans-serif;">Aki</h3>
                 <img src="https://q1.qlogo.cn/g?b=qq&nk=2755770955&s=640" />
-
             </div>
+            <img width="200px" height="200px" id="qrcode" src="./images/group_qrcode.png" >
         </div>
         
 
@@ -320,7 +332,25 @@
         let qrcode = document.getElementById('qrcode')
 
         let icons = document.getElementById('icons').children
-        console.log(icons);
+        
+        /* initial */
+        //着色
+        var icon_bg_colors = [
+            '#f38181','#a6e3e9','#3f72af','#30e3ca','#ffc7c7',
+            '#323232','#0d7377','#b9bbdf','#62d2a2','#590d82',
+            '#005691','#ff8264','#d6c8ff','#c6f1e7','#ed8d8d',
+            '#62d2a2','#5e63b6','#00bbf0','#c06c84','#66bfbf',
+            '#7f4a88','#95e8d7','#163172','#900048'
+        ]
+        for(var i = 0;i<icons.length;i++){
+            icons[i].style.backgroundColor = icon_bg_colors[i]
+            if(i%2==0){
+                icons[i].style.left = 0
+                continue
+            }else{
+                icons[i].style.left = (0.5*vw)+'px'
+            }
+        }
         
         /*动画声明*/
         var scroll_KEYFRAME_anis = [
@@ -355,7 +385,7 @@
                 callback=about_scroll_ani_callback,
                 pre='',
                 suf='px',
-                keyframs=[{r:800,y:vh},{r:800+vh,y:0},{r:7500+vh,y:0},{r:7500+1.8*vh,y:-vh}]
+                keyframs=[{r:800,y:vh},{r:800+vh,y:0},{r:2000+24*vh,y:0},{r:2800+24*vh,y:-vh}]
             ),
             //二维码缩放
             create_LINEAR_ANIMATION(
@@ -383,15 +413,15 @@
                 callback=icon_move,
                 pre='',
                 suf='px',
-                keyframs=[{r:1100+vh,y:-500},{r:2000+vh,y:2*vw/3-100},{r:4000+vh,y:vw}]
+                keyframs=[{r:1100+vh,y:vh},{r:1500+vh,y:0}]
             ),
-            //头像缩放
-            create_LINEAR_ANIMATION(
-                callback=icon_scale,
-                pre='',
-                suf='',
-                keyframs=[{r:1100+vh,y:1},{r:2000+vh,y:1},{r:3000+vh,y:0}]
-            )
+            //头像透明度
+            // create_LINEAR_ANIMATION(
+            //     callback=icon_scale,
+            //     pre='',
+            //     suf='',
+            //     keyframs=[{r:1100+vh,y:1},{r:2000+vh,y:1},{r:3000+vh,y:0}]
+            // )
         ]
         var timer_KEYFRAME_anis = [
             //开场图片透明度
@@ -409,13 +439,12 @@
         }
         function icon_scale(r,v,o){
             for(var i = 0;i<24;i++){
-                icons[i].style.opacity = o.get(o,scrollTop-(i*200))
-                
+                icons[i].style.opacity = o.get(o,scrollTop-(i*vh+100))
             }
         }
         function icon_move(r,v,o){
             for(var i = 0;i<24;i++){
-                icons[i].style.left = o.get(o,scrollTop-(i*200))+'px'
+                icons[i].style.top = o.get(o,scrollTop-(i*vh+100))+'px'
             }
         }
         function qrcode_hmove(r){
