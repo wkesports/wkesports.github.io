@@ -98,7 +98,7 @@
             top: 100vh;
             left: 50vw;
             width: 50vw;
-            height: 100vh;
+            height: 110vh;
             display: flex;
             background: purple;
             flex-direction: column;
@@ -411,15 +411,8 @@
                 callback=icon_move,
                 pre='',
                 suf='px',
-                keyframs=[{r:1100+vh,y:vh},{r:1500+vh,y:0}]
-            ),
-            //头像透明度
-            // create_LINEAR_ANIMATION(
-            //     callback=icon_scale,
-            //     pre='',
-            //     suf='',
-            //     keyframs=[{r:1100+vh,y:1},{r:2000+vh,y:1},{r:3000+vh,y:0}]
-            // )
+                keyframs=[{r:1100+vh,y:1.1*vh},{r:1500+vh,y:0}]
+            )
         ]
         var timer_KEYFRAME_anis = [
             //开场图片透明度
