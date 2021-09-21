@@ -12,6 +12,9 @@
             padding: 0;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         }
+        html{
+            font-size: 16px;
+        }
         body{
             position: relative;
             height: 50000px;
@@ -84,6 +87,7 @@
             position: absolute;
             top: calc(20vh);
             transform: scale(0.2);
+            z-index: 500;
         }
         h1{
             font-size: 4rem;
@@ -104,6 +108,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
         }
         .icon>h3{
             text-align: center;
@@ -115,6 +120,14 @@
             width: 300px;
             height: 300px;
             border-radius: 50%;
+        }
+        .icon_bg_blur{
+            transform: scale(1.5);
+            filter: blur(3rem);
+            background: center center no-repeat;
+            background-size: cover;
+            position: absolute;
+            top:0;left: 0;right: 0;bottom: 0;
         }
     </style>
 </head>
@@ -132,12 +145,14 @@
         <h1>介绍我们</h1>
         <div id="icons">
             <div class='icon'>
+                <!-- <div class='icon_bg_blur' style="background-image: url('https://q1.qlogo.cn/g?b=qq&nk=516470700&s=640')"></div> -->
                 <h3 style="font-weight: bold;font-family: Arial, Helvetica, sans-serif;">Yami</h3>
-                <img src="https://q1.qlogo.cn/g?b=qq&nk=516470700&s=640"/>
+                <img style="z-index: 2;" src="https://q1.qlogo.cn/g?b=qq&nk=516470700&s=640"/>
             </div>
             <div class='icon'>
+                <!-- <div class='icon_bg_blur' style="background-image: url('https://q1.qlogo.cn/g?b=qq&nk=2547670357&s=640')"></div> -->
                 <h3 style="font-weight: bold;font-family: Arial, Helvetica, sans-serif;">白荼</h3>
-                <img src="https://q1.qlogo.cn/g?b=qq&nk=2547670357&s=640"/>
+                <img style="z-index: 3;" src="https://q1.qlogo.cn/g?b=qq&nk=2547670357&s=640"/>
             </div>
             
             <div class='icon'>
@@ -246,7 +261,6 @@
             <div class='icon'>
                 <h3 style="font-weight: bold;font-family: Arial, Helvetica, sans-serif;">阿林</h3>
                 <img src="https://q1.qlogo.cn/g?b=qq&nk=2637197332&s=640" />
-
             </div>
     
             <div class='icon'>
@@ -264,6 +278,8 @@
     <script>
         var vh = document.documentElement.clientHeight
         var vw = document.documentElement.clientWidth
+        let _rem = vw / 16
+        console.log(_rem);
         function create_LINEAR_ANIMATION(callback,pre='',suf='',keyframs){
             var obj = new Object
             obj.RATION = 0
@@ -336,9 +352,18 @@
             '#62d2a2','#5e63b6','#00bbf0','#c06c84','#66bfbf',
             '#7f4a88','#95e8d7','#163172','#900048'
         ]
+
         
         for(var i = 0;i<icons.length-1;i++){
-            icons[i].style.backgroundColor = icon_bg_colors[i]
+            var bg_blur = document.createElement('div')
+            bg_blur.className = 'icon_bg_blur'
+            icons[i].appendChild(bg_blur)
+            // icons[i].style.backgroundColor = icon_bg_colors[i]
+            // // icons[i].children[2].
+            icons[i].children[2].style.backgroundImage = 'url("'+icons[i].children[1].src+'")'
+            icons[i].children[2].style.zIndex =2+2*i 
+            icons[i].children[1].style.zIndex =2*i+3
+            icons[i].children[0].style.zIndex =2*i+3
             if(vw<=831){
                 icons[i].style.left = 0
                 icons[i].style.width = 100+'vw'
@@ -383,7 +408,7 @@
                 callback=about_scroll_ani_callback,
                 pre='',
                 suf='px',
-                keyframs=[{r:800,y:vh},{r:800+vh,y:0},{r:2000+24*vh,y:0},{r:2800+24*vh,y:-1.1*vh}]
+                keyframs=[{r:800,y:vh},{r:800+vh,y:0},{r:2000+24*vh,y:0},{r:3000+24*vh,y:-1.1*vh}]
             ),
             //二维码缩放
             create_LINEAR_ANIMATION(
@@ -411,14 +436,14 @@
                 callback=icon_move,
                 pre='',
                 suf='px',
-                keyframs=[{r:1100+vh,y:1.1*vh},{r:1500+vh,y:0}]
+                keyframs=[{r:1100+vh,y:1.1*vh},{r:1500+vh,y:0},{r:vw<831?2000+1.5*vh:2000+2*vh,y:0},{r:vw<831?2000+2*vh:2000+3*vh,y:-1*_rem}]
             ),
-            //头像透明度
+            //头像缩放
             create_LINEAR_ANIMATION(
                 callback=icon_opacity,
                 pre='',
                 suf='',
-                keyframs=[{r:vw<831?1500+1.5*vh:1500+2*vh,y:1},{r:vw<831?1500+2*vh:1500+3*vh,y:0}]
+                keyframs=[{r:vw<831?2000+1.5*vh:2000+2*vh,y:1},{r:vw<831?2000+2*vh:2000+3*vh,y:0}]
             )
         ]
         var timer_KEYFRAME_anis = [
@@ -435,7 +460,7 @@
         function icon_opacity(r,v,o){
             for(var i = 0;i<24;i++){
                 icons[i].style.opacity = o.get(o,scrollTop-(i*vh+100))
-                icons[i].style.transform = 'scale('+(0.9+0.1*o.get(o,scrollTop-(i*vh+100)))+')'
+                // icons[i].style.transform = 'scale('+(0.9+0.1*o.get(o,scrollTop-(i*vh+100)))+')'
             }
         }
         function mainpic_display(r){
