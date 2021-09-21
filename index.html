@@ -439,13 +439,6 @@
                 suf='px',
                 keyframs=[{r:1100+vh,y:1.1*vh},{r:1500+vh,y:0},{r:vw<831?2000+1.5*vh:2000+2*vh,y:0},{r:vw<831?2000+2*vh:2000+3*vh,y:-1*_rem}]
             ),
-            //头像缩放
-            create_LINEAR_ANIMATION(
-                callback=icon_opacity,
-                pre='',
-                suf='',
-                keyframs=[{r:vw<831?2000+1.5*vh:2000+2*vh,y:1},{r:vw<831?2000+2*vh:2000+3*vh,y:0}]
-            ),
             //头像显示
             create_LINEAR_ANIMATION(
                 callback=icon_display,
