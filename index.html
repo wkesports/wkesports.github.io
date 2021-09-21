@@ -435,6 +435,7 @@
         function icon_opacity(r,v,o){
             for(var i = 0;i<24;i++){
                 icons[i].style.opacity = o.get(o,scrollTop-(i*vh+100))
+                icons[i].style.transform = 'scale('+(0.9+0.1*o.get(o,scrollTop-(i*vh+100)))+')'
             }
         }
         function mainpic_display(r){
