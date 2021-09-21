@@ -412,6 +412,13 @@
                 pre='',
                 suf='px',
                 keyframs=[{r:1100+vh,y:1.1*vh},{r:1500+vh,y:0}]
+            ),
+            //头像透明度
+            create_LINEAR_ANIMATION(
+                callback=icon_opacity,
+                pre='',
+                suf='',
+                keyframs=[{r:vw<831?1500+1.5*vh:1500+2*vh,y:1},{r:vw<831?1500+2*vh:1500+3*vh,y:0}]
             )
         ]
         var timer_KEYFRAME_anis = [
@@ -425,13 +432,13 @@
         ]
         
         /*动画回调函数*/
-        function mainpic_display(r){
-            mainpic.style.display = r
-        }
-        function icon_scale(r,v,o){
+        function icon_opacity(r,v,o){
             for(var i = 0;i<24;i++){
                 icons[i].style.opacity = o.get(o,scrollTop-(i*vh+100))
             }
+        }
+        function mainpic_display(r){
+            mainpic.style.display = r
         }
         function icon_move(r,v,o){
             for(var i = 0;i<24;i++){
