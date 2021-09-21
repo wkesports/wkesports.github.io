@@ -450,7 +450,7 @@
                 callback=icon_display,
                 pre='',
                 suf='',
-                keyframs=[{r:0,y:'hidden'},{r:1100+vh,y:'none'},{r:vw<831?2000+2*vh:2000+3*vh,y:'hidden'}]
+                keyframs=[{r:0,y:'hidden'},{r:1100+vh,y:'flex'},{r:vw<831?2000+2*vh:2000+3*vh,y:'hidden'}]
             )
         ]
         var timer_KEYFRAME_anis = [
@@ -465,7 +465,9 @@
         
         /*动画回调函数*/
         function icon_display(r){
-            icons[i].style.display = r
+            for(var i = 0;i<24;i++){
+                icons[i].style.display = r
+            }
         }
         function icon_opacity(r,v,o){
             // for(var i = 0;i<24;i++){
