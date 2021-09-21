@@ -444,6 +444,13 @@
                 pre='',
                 suf='',
                 keyframs=[{r:vw<831?2000+1.5*vh:2000+2*vh,y:1},{r:vw<831?2000+2*vh:2000+3*vh,y:0}]
+            ),
+            //头像显示
+            create_LINEAR_ANIMATION(
+                callback=icon_display,
+                pre='',
+                suf='',
+                keyframs=[{r:0,y:'hidden'},{r:1100+vh,y:'none'},{r:vw<831?2000+2*vh:2000+3*vh,y:'hidden'}]
             )
         ]
         var timer_KEYFRAME_anis = [
@@ -457,14 +464,17 @@
         ]
         
         /*动画回调函数*/
+        function icon_display(r){
+            icons[i].style.display = r
+        }
         function icon_opacity(r,v,o){
-            for(var i = 0;i<24;i++){
-                icons[i].style.opacity = o.get(o,scrollTop-(i*vh+100))
-                // icons[i].style.transform = 'scale('+(0.9+0.1*o.get(o,scrollTop-(i*vh+100)))+')'
-            }
+            // for(var i = 0;i<24;i++){
+            //     // icons[i].style.opacity = o.get(o,scrollTop-(i*vh+100))
+            //     // icons[i].style.transform = 'scale('+(0.9+0.1*o.get(o,scrollTop-(i*vh+100)))+')'
+            // }
         }
         function mainpic_display(r){
-            mainpic.style.display = r
+            mainpic.hidden = r
         }
         function icon_move(r,v,o){
             for(var i = 0;i<24;i++){
