@@ -336,8 +336,14 @@
             '#62d2a2','#5e63b6','#00bbf0','#c06c84','#66bfbf',
             '#7f4a88','#95e8d7','#163172','#900048'
         ]
-        for(var i = 0;i<icons.length;i++){
+        
+        for(var i = 0;i<icons.length-1;i++){
             icons[i].style.backgroundColor = icon_bg_colors[i]
+            if(vw<=831){
+                icons[i].style.left = 0
+                icons[i].style.width = 100+'vw'
+                continue
+            }
             if(i%2==0){
                 icons[i].style.left = 0
                 continue
