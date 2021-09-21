@@ -96,7 +96,7 @@
         .icon{
             position: absolute;
             top: 100vh;
-            left: 0;
+            left: 50vw;
             width: 50vw;
             height: 100vh;
             display: flex;
@@ -105,13 +105,6 @@
             justify-content: center;
             align-items: center;
         }
-        /* .icon::before{
-            position: absolute;
-            top: 0;left: 0;right: 0;bottom: 0;
-            content: '';
-            background: purple;
-            opacity: 0.2;
-        } */
         .icon>h3{
             text-align: center;
             font-size: xx-large;
@@ -348,8 +341,6 @@
             if(i%2==0){
                 icons[i].style.left = 0
                 continue
-            }else{
-                icons[i].style.left = (0.5*vw)+'px'
             }
         }
         
