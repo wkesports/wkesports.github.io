@@ -37,7 +37,7 @@
             content: '';
             position: absolute;
             top: 0;left: 0;right: 0;bottom: 0;
-            background: white;
+            background: black;
             opacity: 30%;
             z-index: 0;
         }
@@ -109,6 +109,7 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
+            opacity: 1;
         }
         .icon>h3{
             text-align: center;
@@ -123,12 +124,17 @@
         }
         .icon_bg_blur{
             transform: scale(1.5);
-            filter: blur(3rem);
-            -webkit-filter: blur(3rem);
             background: center center no-repeat;
             background-size: cover;
             position: absolute;
             top:0;left: 0;right: 0;bottom: 0;
+        }
+        .icon_bg_blur::before{
+            content: '';
+            position: absolute;
+            top: 0;left: 0;right: 0;bottom: 0;
+            backdrop-filter: blur(2rem);
+            -webkit-backdrop-filter: blur(2rem);
         }
     </style>
 </head>
@@ -395,7 +401,9 @@
                 callback=tp1_text_ani_callback,
                 pre='',
                 suf='',
-                keyframs=[{r:200,y:'WKESPORTS'},{r:300,y:'KESPORT'},{r:400,y:'ESPOR'},{r:500,y:'SPO'},{r:600,y:'P'},{r:700,y:''}]
+                keyframs=[{r:200,y:'WKESPORTS'},{r:300,y:'KESPORT'},
+                {r:400,y:'ESPOR'},{r:500,y:'SPO'},
+                {r:600,y:'P'},{r:700,y:''}]
             ),
             //tp2和tp2透明度
             create_LINEAR_ANIMATION(
@@ -437,14 +445,17 @@
                 callback=icon_move,
                 pre='',
                 suf='px',
-                keyframs=[{r:1100+vh,y:1.1*vh},{r:1500+vh,y:0},{r:vw<831?2000+1.5*vh:2000+2*vh,y:0},{r:vw<831?2000+2*vh:2000+3*vh,y:-1*_rem}]
+                keyframs=[{r:1100+vh,y:1.1*vh},{r:1500+vh,y:0},
+                {r:vw<831?2000+1.5*vh:2000+2*vh,y:0},
+                {r:vw<831?2000+2*vh:2000+3*vh,y:-2*_rem}]
             ),
             //头像显示
             create_LINEAR_ANIMATION(
                 callback=icon_display,
                 pre='',
                 suf='',
-                keyframs=[{r:0,y:'hidden'},{r:1100+vh,y:'flex'},{r:vw<831?2000+2*vh:2000+3*vh,y:'hidden'}]
+                keyframs=[{r:0,y:'none'},{r:1100+vh,y:'flex'},
+                {r:vw<831?2000+2*vh:2000+3*vh,y:'none'}]
             )
         ]
         var timer_KEYFRAME_anis = [
@@ -458,9 +469,9 @@
         ]
         
         /*动画回调函数*/
-        function icon_display(r){
+        function icon_display(r,v,o){
             for(var i = 0;i<24;i++){
-                icons[i].style.display = r
+                icons[i].style.display = o.get(o,scrollTop-(i*vh+100))
             }
         }
         function mainpic_display(r){
